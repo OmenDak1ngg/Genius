@@ -5,12 +5,12 @@ public class Mover : MonoBehaviour
     [SerializeField] private Transform _waypointsContainer;
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _speed;
+    [SerializeField] private float _minHitDistance = 0.1f;
 
     private int _currentWaypointIndex;
 
     public float Speed => _speed;
     public Transform WaypointContainer => _waypointsContainer;
-    
     private void Start()
     {
         _currentWaypointIndex = 0;
@@ -21,7 +21,7 @@ public class Mover : MonoBehaviour
         var _currentWaypoint = _waypoints[_currentWaypointIndex];
         transform.position = Vector3.MoveTowards(transform.position, _currentWaypoint.position, _speed * Time.deltaTime);
 
-        if (transform.position == _currentWaypoint.position) 
+        if((transform.position - _currentWaypoint.position).sqrMagnitude < _minHitDistance)
             SelectNextWaypoint();
     }
 
