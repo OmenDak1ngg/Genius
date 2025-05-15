@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ShootingWepaon : MonoBehaviour
+public class WeaponShooter : MonoBehaviour
 {
     [SerializeField] private Bullet _prefabRigidbody;
     [SerializeField] private float _speed;
@@ -11,12 +11,7 @@ public class ShootingWepaon : MonoBehaviour
     public float Speed => _speed;
     public Target Target => _target;
 
-    private void Start()
-    {
-        StartCoroutine(StartShooting());
-    }
-
-    private IEnumerator StartShooting()
+    private IEnumerator Start()
     {
         WaitForSeconds delay = new WaitForSeconds(_shootDelay);
 

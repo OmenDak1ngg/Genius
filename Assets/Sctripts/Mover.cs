@@ -11,6 +11,7 @@ public class Mover : MonoBehaviour
 
     public float Speed => _speed;
     public Transform WaypointContainer => _waypointsContainer;
+
     private void Start()
     {
         _currentWaypointIndex = 0;
@@ -18,14 +19,14 @@ public class Mover : MonoBehaviour
     
     private void Update()
     {
-        var _currentWaypoint = _waypoints[_currentWaypointIndex];
-        transform.position = Vector3.MoveTowards(transform.position, _currentWaypoint.position, _speed * Time.deltaTime);
+        var currentWaypoint = _waypoints[_currentWaypointIndex];
+        transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, _speed * Time.deltaTime);
 
-        if((transform.position - _currentWaypoint.position).sqrMagnitude < _minHitDistance)
+        if((transform.position - currentWaypoint.position).sqrMagnitude < _minHitDistance)
             SelectNextWaypoint();
     }
 
-    public void SelectNextWaypoint()
+    private void SelectNextWaypoint()
     {
         _currentWaypointIndex = ++_currentWaypointIndex % _waypoints.Length;
 
